@@ -19,7 +19,7 @@ public:
     }
 
 private:
-    ThemeMemStream _stream{0, false};
+    CThemeMemStream _stream{0};
     bool _bInited = false;
     IWICImagingFactory* _pICodecFactory = nullptr;
     IWICComponentInfo* _pInfo1 = nullptr;
