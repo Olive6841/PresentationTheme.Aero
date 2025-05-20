@@ -14,11 +14,11 @@ class CUxThemeFile;
 struct RENDER_OBJ_ENTRY
 {
     CRenderObj* pRenderObj;
-    unsigned dwRecycleNum;
+    DWORD dwRecycleNum;
     int iRefCount;
     int iInUseCount;
     int iLoadId;
-    bool fClosing;
+    BOOL fClosing;
     HWND hwnd;
 };
 
@@ -39,9 +39,9 @@ public:
     HRESULT CloseRenderObject(HTHEME hTheme);
 
 private:
-    std::mutex _csListLock;
+    LONGLONG _iNextUniqueId = 0;
     std::vector<RENDER_OBJ_ENTRY> _RenderEntries;
-    int _iNextUniqueId = 0;
+    std::mutex _csListLock;
 };
 
 } // namespace uxtheme

@@ -8,7 +8,7 @@ namespace uxtheme
 
 struct THEMEMETRICS
 {
-    LOGFONTW lfFonts[9];
+    LOGFONT lfFonts[9];
     COLORREF crColors[31];
     int iSizes[10];
     BOOL fBools[1];
@@ -33,9 +33,9 @@ union MIXEDPTRS
 {
     BYTE* pb;
     char* pc;
-    unsigned short* pw;
-    short* ps;
-    wchar_t* px;
+    WORD* pw;
+    SHORT* ps;
+    WCHAR* px;
     int* pi;
     DWORD* pdw;
     POINT* ppt;
@@ -76,7 +76,7 @@ struct ENTRYHDR
 
 struct NONSHARABLEDATAHDR
 {
-    unsigned dwFlags;
+    DWORD dwFlags;
     int iLoadId;
     int cBitmaps;
     int iBitmapsOffset;
@@ -140,15 +140,15 @@ struct APPCLASSLOCAL
 struct THEMEHDR
 {
     char szSignature[8];
-    unsigned dwVersion;
+    DWORD dwVersion;
     FILETIME ftModifTimeStamp;
-    unsigned dwTotalLength;
+    DWORD dwTotalLength;
     int iDllNameOffset;
     int iColorParamOffset;
     int iSizeParamOffset;
-    unsigned dwLangID;
+    DWORD dwLangID;
     int iLoadDPI;
-    unsigned dwLoadDPIs;
+    DWORD dwLoadDPIs;
     int iLoadPPI;
     int iStringsOffset;
     int iStringsLength;
@@ -187,12 +187,14 @@ struct TRUESTRETCHINFO
 {
     BOOL fForceStretch;
     BOOL fFullStretch;
+    BOOL fGdiScaledContent; // @Todo: Find out when this was added
+    BOOL fGdiScaledBitBlt; // @Todo: Find out when this was added
     SIZE szDrawSize;
 };
 
 struct REUSEDATAHDR
 {
-    wchar_t szSharableSectionName[MAX_PATH];
+    WCHAR szSharableSectionName[MAX_PATH];
     int iDIBReuseRecordsCount;
     int iDIBReuseRecordsOffset;
     DWORD dwTotalLength;

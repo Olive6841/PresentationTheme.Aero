@@ -463,4 +463,7 @@ struct VersionInfo
 
 HRESULT GetModuleFileVersion(HMODULE module, VersionInfo& version);
 
+LPVOID __fastcall ThemeHeapAlloc(DWORD dwFlags, SIZE_T dwBytes);
+BOOL __fastcall ThemeHeapFree(void* pvBlock);
+LPVOID __fastcall ThemeHeapReAlloc(DWORD dwFlags, void* pvBlock, SIZE_T dwBytes);
 } // namespace uxtheme
