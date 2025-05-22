@@ -1564,11 +1564,11 @@ HRESULT CImageFile::HitTestBackground(CRenderObj* pRender, HDC hdc, int iStateId
         if (!GetRgnBox(hrgn, &rgnBox))
             return hr;
         if (dwHTFlags & HTTB_SIZINGTEMPLATE)
-            *pwHitCode = HitTestTemplate(dwHTFlags, &rgnBox, hrgn, &margins, &ptTest);
+            *pwHitCode = HitTestTemplate(dwHTFlags, &rgnBox, hrgn, margins, ptTest);
         else
-            *pwHitCode = HitTestRect(dwHTFlags, &rgnBox, &margins, &ptTest);
+            *pwHitCode = HitTestRect(dwHTFlags, &rgnBox, margins, ptTest);
     } else {
-        *pwHitCode = HitTestRect(dwHTFlags, pRect, &margins, &ptTest);
+        *pwHitCode = HitTestRect(dwHTFlags, pRect, margins, ptTest);
     }
 
     return hr;

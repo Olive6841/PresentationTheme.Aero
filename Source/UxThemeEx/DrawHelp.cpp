@@ -356,10 +356,10 @@ namespace uxtheme
         return hit;
     }
 
-    WORD HitTestTemplate(DWORD dwHTFlags, RECT const* prc, HRGN hrgn, MARGINS const* margins,
-                         POINT const* pt)
+    WORD HitTestTemplate(DWORD dwHTFlags, RECT const* prc, HRGN hrgn, MARGINS const& margins,
+                         POINT const& pt)
     {
-        if (!PtInRect(prc, *pt))
+        if (!PtInRect(prc, pt))
             return HTNOWHERE;
 
         WORD hit = HitTest9Grid(prc, margins, pt, (dwHTFlags >> 10) & 1);
@@ -367,7 +367,7 @@ namespace uxtheme
             return hit;
 
         if (dwHTFlags & HTTB_RESIZINGBORDER)
-            return _HitTestResizingTemplate(dwHTFlags, hrgn, pt, hit, HTBORDER);
+            return _HitTestResizingTemplate(dwHTFlags, hrgn, &pt, hit, HTBORDER);
 
         if (dwHTFlags & (HTTB_FIXEDBORDER | HTTB_CAPTION))
         {

@@ -264,7 +264,7 @@ HRESULT CBorderFill::HitTestBackground(CRenderObj* pRender, int iStateId, DWORD 
                                        RECT const* pRect, HRGN hrgn, POINT ptTest,
                                        WORD* pwHitCode)
 {
-    *pwHitCode = HitTestRect(dwHTFlags, pRect, &_ContentMargins, &ptTest);
+    *pwHitCode = HitTestRect(dwHTFlags, pRect, _ContentMargins, ptTest);
     return S_OK;
 }
 
