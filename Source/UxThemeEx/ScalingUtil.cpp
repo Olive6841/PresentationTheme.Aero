@@ -3,7 +3,7 @@
 #include "DpiInfo.h"
 #include "RenderObj.h"
 
-namespace uxtheme
+namespace UxTheme
 {
     void ScaleLongValues(long scale, long* numbers, int count)
     {
@@ -64,4 +64,4 @@ namespace uxtheme
             pMargins->cyBottomHeight = MulDiv(pMargins->cyBottomHeight, targetDpi, 96);
         }
     }
-} // namespace uxtheme
+} // namespace UxTheme

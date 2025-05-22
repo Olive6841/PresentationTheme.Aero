@@ -9,7 +9,7 @@
 #include "UxThemeHelpers.h"
 #include <strsafe.h>
 
-namespace uxtheme
+namespace UxTheme
 {
 
 static HRESULT _BitmapFromDib(HDC hdc, void* const pvDibBits, HBITMAP* phBitmap)
@@ -942,4 +942,4 @@ HRESULT CRenderObj::PrepareRegionDataForScaling(RGNDATA* pRgnData, RECT const* p
 template HRESULT CRenderObj::GetPartObject(int iPartId, int iStateId, CDrawBase** ppvObj);
 template HRESULT CRenderObj::GetPartObject(int iPartId, int iStateId, CTextDraw** ppvObj);
 
-} // namespace uxtheme
+} // namespace UxTheme

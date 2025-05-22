@@ -3,7 +3,7 @@
 #include "Primitives.h"
 #include "TextDraw.h"
 
-namespace uxtheme
+namespace UxTheme
 {
 class CUxThemeFile;
 
@@ -26,4 +26,4 @@ void ValidatePtr(CDrawBase const* hdr);
 HRESULT DumpThemeToTextFile(CUxThemeFile* themeFile, wchar_t const* binPath,
                             wchar_t const* textPath);
 HRESULT DumpLoadedThemeToTextFile(wchar_t const* binPath, wchar_t const* textPath);
-} // namespace uxtheme
+} // namespace UxTheme

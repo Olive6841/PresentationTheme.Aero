@@ -6,7 +6,7 @@
 #include "UxThemeEx.h"
 #include <vssym32.h>
 
-namespace uxtheme
+namespace UxTheme
 {
 
 static HRESULT DrawTextWithGlow(HDC hdcMem, wchar_t const* pszText, unsigned cch,
@@ -437,4 +437,4 @@ done:
     return hr;
 }
 
-} // namespace uxtheme
+} // namespace UxTheme

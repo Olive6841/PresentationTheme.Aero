@@ -5,7 +5,7 @@
 #include "UxThemeFile.h"
 #include <memory>
 
-namespace uxtheme
+namespace UxTheme
 {
 
 class ThemeFileEntry
@@ -53,4 +53,4 @@ HTHEME OpenThemeDataExInternal(HTHEMEFILE hThemeFile, HWND hwnd,
                                wchar_t const* pszClassIdList, unsigned dwFlags,
                                wchar_t const* pszApiName, int iForDPI);
 
-} // namespace uxtheme
+} // namespace UxTheme

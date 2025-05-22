@@ -3,7 +3,7 @@
 #include <vssym32.h>
 #include <windows.h>
 
-namespace uxtheme
+namespace UxTheme
 {
 
 enum TM_RESERVED_PROPVALS
@@ -364,4 +364,4 @@ inline int Map_Ordinal_To_DIBDATA(int i)
     }
 }
 
-} // namespace uxtheme
+} // namespace UxTheme

@@ -2,7 +2,7 @@
 #include <uxtheme.h>
 #include <windows.h>
 
-namespace uxtheme
+namespace UxTheme
 {
     class CRenderObj;
 
@@ -11,4 +11,4 @@ namespace uxtheme
     void ScaleThemeFont(HDC hdc, CRenderObj const* pRender, LOGFONTW* plf);
     void ScaleFontForScreenDpi(LOGFONTW* plf);
     void ScaleMargins(MARGINS* pMargins, UINT targetDpi);
-} // namespace uxtheme
+} // namespace UxTheme

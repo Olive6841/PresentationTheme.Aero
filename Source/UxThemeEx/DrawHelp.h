@@ -2,7 +2,7 @@
 #include <uxtheme.h>
 #include <windows.h>
 
-namespace uxtheme
+namespace UxTheme
 {
 
 WORD HitTestRect(DWORD dwHTFlags, RECT const* prc, MARGINS const& margins,
@@ -14,4 +14,4 @@ WORD HitTest9Grid(RECT const* prc, MARGINS const& margins, POINT const& pt,
 WORD HitTestTemplate(DWORD dwHTFlags, RECT const* prc, HRGN hrgn, MARGINS const& margins,
                      POINT const& pt);
 
-} // namespace uxtheme
+} // namespace UxTheme

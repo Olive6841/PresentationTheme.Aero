@@ -3,7 +3,7 @@
 #include <vssym32.h>
 #include <windows.h>
 
-namespace uxtheme
+namespace UxTheme
 {
     struct THEMEMETRICS
     {
@@ -254,4 +254,4 @@ namespace uxtheme
         SYSTEMPARAMETERSINFOFORDPI pfnSystemParametersInfoForDpi;
         GETWINDOWPROCESSPROC pfnGetWindowProcess;
     } USERAPIHOOK, *PUSERAPIHOOK;
-} // namespace uxtheme
+} // namespace UxTheme

@@ -1,7 +1,7 @@
 #pragma once
 #include <vssym32.h>
 
-namespace uxtheme
+namespace UxTheme
 {
 
 class CDrawBase
@@ -11,4 +11,4 @@ public:
     int _iUnused;
 };
 
-} // namespace uxtheme
+} // namespace UxTheme

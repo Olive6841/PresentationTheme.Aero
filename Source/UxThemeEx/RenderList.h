@@ -4,7 +4,7 @@
 #include <vector>
 #include <windows.h>
 
-namespace uxtheme
+namespace UxTheme
 {
 class CDrawBase;
 class CRenderObj;
@@ -44,4 +44,4 @@ private:
     std::mutex _csListLock;
 };
 
-} // namespace uxtheme
+} // namespace UxTheme

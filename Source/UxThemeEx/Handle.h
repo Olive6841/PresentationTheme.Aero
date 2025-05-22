@@ -3,7 +3,7 @@
 #include <utility>
 #include <windows.h>
 
-namespace uxtheme
+namespace UxTheme
 {
 
 template<typename Traits>
@@ -173,4 +173,4 @@ struct SectionHandleTraits : NullIsInvalidHandleTraits
 {};
 using SectionHandle = Handle<SectionHandleTraits>;
 
-} // namespace uxtheme
+} // namespace UxTheme

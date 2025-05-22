@@ -2,7 +2,7 @@
 #include "Utils.h"
 #include <windows.h>
 
-namespace uxtheme
+namespace UxTheme
 {
 
 class BitmapPixels
@@ -23,4 +23,4 @@ private:
     int _iHeight = 0;
 };
 
-} // namespace uxtheme
+} // namespace UxTheme

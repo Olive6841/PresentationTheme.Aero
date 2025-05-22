@@ -9,7 +9,7 @@
 #include "UxThemeHelpers.h"
 #include "gdiex.h"
 
-namespace uxtheme
+namespace UxTheme
 {
 
 static void AdjustSizeMin(SIZE* psz, int ixMin, int iyMin)
@@ -1648,4 +1648,4 @@ HRESULT CImageFile::BuildRgnData(DWORD* prgdwPixels, int cWidth, int cHeight,
     return S_OK;
 }
 
-} // namespace uxtheme
+} // namespace UxTheme

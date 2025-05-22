@@ -18,7 +18,7 @@
 #include <winnt.h>
 #include <winternl.h>
 
-namespace uxtheme
+namespace UxTheme
 {
 
 static std::unordered_set<ENTRYHDR const*> entryHeaders;
@@ -1107,4 +1107,4 @@ HRESULT DumpSystemThemeToTextFile(wchar_t const* path, bool packed, bool fullInf
     return DumpThemeFile(themeFile, path, packed, fullInfo);
 }
 
-} // namespace uxtheme
+} // namespace UxTheme

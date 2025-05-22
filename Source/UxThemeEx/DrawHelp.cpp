@@ -1,6 +1,6 @@
 #include "DrawHelp.h"
 
-namespace uxtheme
+namespace UxTheme
 {
     typedef WORD (*HITTESTRECTPROC)(LPCRECT prc, int cxMargin, int cyMargin, const POINT& pt, WORD wMiss);
 
@@ -379,4 +379,4 @@ namespace uxtheme
 
         return hit;
     }
-} // namespace uxtheme
+} // namespace UxTheme

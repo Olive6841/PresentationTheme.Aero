@@ -3,7 +3,7 @@
 #include "RenderObj.h"
 #include "Utils.h"
 
-namespace uxtheme
+namespace UxTheme
 {
 
 static HTHEME MakeThemeHandle(int slot, int recycleNum)
@@ -193,4 +193,4 @@ HRESULT CRenderList::CloseRenderObject(HTHEME hTheme)
     return S_OK;
 }
 
-} // namespace uxtheme
+} // namespace UxTheme

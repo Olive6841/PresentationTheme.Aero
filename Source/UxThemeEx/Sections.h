@@ -3,7 +3,7 @@
 #include <array>
 #include <windows.h>
 
-namespace uxtheme
+namespace UxTheme
 {
 
 struct ROOTSECTION
@@ -57,4 +57,4 @@ public:
     HRESULT GetRootSectionData(ROOTSECTION** ppRootSection);
 };
 
-} // namespace uxtheme
+} // namespace UxTheme

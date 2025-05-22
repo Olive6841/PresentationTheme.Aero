@@ -1,6 +1,6 @@
 #include "Global.h"
 
-namespace uxtheme
+namespace UxTheme
 {
 
 std::vector<ThemeFileEntry> g_ThemeFileHandles;
@@ -26,4 +26,4 @@ CUxThemeFile* ThemeFileFromHandle(HTHEMEFILE hThemeFile)
     return idx ? &g_ThemeFileHandles[idx].ThemeFile() : nullptr;
 }
 
-} // namespace uxtheme
+} // namespace UxTheme

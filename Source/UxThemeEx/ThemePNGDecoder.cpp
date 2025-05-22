@@ -1,7 +1,7 @@
 #include "ThemePNGDecoder.h"
 #include "Utils.h"
 
-namespace uxtheme
+namespace UxTheme
 {
 
 HRESULT CThemePNGDecoder::_Init()
@@ -120,4 +120,4 @@ HRESULT CThemePNGDecoder::ConvertToDIB(BYTE const* lpBits, unsigned cbDIB, bool*
     return hr;
 }
 
-} // namespace uxtheme
+} // namespace UxTheme

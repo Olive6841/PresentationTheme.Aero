@@ -5,7 +5,7 @@
 #include <string>
 #include <vector>
 
-namespace uxtheme
+namespace UxTheme
 {
 
 namespace
@@ -85,4 +85,4 @@ HRESULT SymbolContext::GetSymbolAddress(HMODULE module, char const* symbolName,
     return S_OK;
 }
 
-} // namespace uxtheme
+} // namespace UxTheme

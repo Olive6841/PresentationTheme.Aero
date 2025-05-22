@@ -7,7 +7,7 @@
 #include <vector>
 #include <windows.h>
 
-namespace uxtheme
+namespace UxTheme
 {
 
 class CThemePNGDecoder;
@@ -159,4 +159,4 @@ private:
     CThemePNGDecoder* _pDecoder = nullptr;
 };
 
-} // namespace uxtheme
+} // namespace UxTheme

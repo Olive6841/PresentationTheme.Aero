@@ -3,7 +3,7 @@
 #include "SymbolContext.h"
 #include "Utils.h"
 
-namespace uxtheme
+namespace UxTheme
 {
 
 UxThemeDllHelper const& UxThemeDllHelper::Get()
@@ -78,4 +78,4 @@ UxThemeDllHelper::UxThemeDllHelper()
     }
 }
 
-} // namespace uxtheme
+} // namespace UxTheme

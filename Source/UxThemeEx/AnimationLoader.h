@@ -3,7 +3,7 @@
 #include <vector>
 #include <windows.h>
 
-namespace uxtheme
+namespace UxTheme
 {
 
 struct AnimationProperty
@@ -60,4 +60,4 @@ public:
     TA_TRANSFORM* _pCurrentTransform;
 };
 
-} // namespace uxtheme
+} // namespace UxTheme

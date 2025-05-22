@@ -3,7 +3,7 @@
 #include <memory>
 #include <objidl.h>
 
-namespace uxtheme
+namespace UxTheme
 {
     class CThemeMemStream : public IStream
     {
@@ -44,4 +44,4 @@ namespace uxtheme
         SIZE_T m_cbInitialSize;
         UINT m_RefCnt;
     };
-} // namespace uxtheme
+} // namespace UxTheme

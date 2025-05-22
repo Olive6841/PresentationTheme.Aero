@@ -1,7 +1,7 @@
 #pragma once
 #include "Handle.h"
 
-namespace uxtheme
+namespace UxTheme
 {
 
 template<typename T>
@@ -22,4 +22,4 @@ using GdiBrushHandle = Handle<GdiObjectTraits<HBRUSH>>;
 using GdiPenHandle = Handle<GdiObjectTraits<HPEN>>;
 using GdiRegionHandle = Handle<GdiObjectTraits<HRGN>>;
 
-} // namespace uxtheme
+} // namespace UxTheme

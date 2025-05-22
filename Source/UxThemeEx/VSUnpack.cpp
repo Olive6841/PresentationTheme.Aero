@@ -13,7 +13,7 @@
 using std::array;
 using std::nothrow;
 
-namespace uxtheme
+namespace UxTheme
 {
 
 enum THEMEPRIMITIVEID
@@ -2640,4 +2640,4 @@ bool CVSUnpack::_DelayRecord(VSRECORD* pRec)
     }
 }
 
-} // namespace uxtheme
+} // namespace UxTheme

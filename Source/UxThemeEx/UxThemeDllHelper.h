@@ -1,7 +1,7 @@
 #pragma once
 #include <cstdint>
 
-namespace uxtheme
+namespace UxTheme
 {
 
 class UxThemeDllHelper
@@ -39,4 +39,4 @@ private:
     uintptr_t addresses[ProcCount]{};
 };
 
-} // namespace uxtheme
+} // namespace UxTheme

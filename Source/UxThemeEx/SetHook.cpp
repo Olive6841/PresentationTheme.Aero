@@ -1,7 +1,7 @@
 #include "SetHook.h"
 #include "Primitives.h"
 
-namespace uxtheme
+namespace UxTheme
 {
     enum THEMEHOOKSTATE
     {

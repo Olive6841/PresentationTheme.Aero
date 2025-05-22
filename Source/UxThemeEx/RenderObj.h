@@ -8,7 +8,7 @@
 #include <mutex>
 #include <vector>
 
-namespace uxtheme
+namespace UxTheme
 {
 
 struct AnimationProperty;
@@ -217,4 +217,4 @@ private:
     bool _fIsStronglyAssociatedDpi;
 };
 
-} // namespace uxtheme
+} // namespace UxTheme

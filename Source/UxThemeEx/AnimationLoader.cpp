@@ -2,7 +2,7 @@
 #include "Utils.h"
 #include "UxThemeEx.h"
 
-namespace uxtheme
+namespace UxTheme
 {
 
 namespace
@@ -67,4 +67,4 @@ TA_TRANSFORM const* CTransformSerializer::GetTransformByIndex(BYTE* pb, DWORD dw
     return nullptr;
 }
 
-} // namespace uxtheme
+} // namespace UxTheme

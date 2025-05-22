@@ -6,7 +6,7 @@
 #include <vssym32.h>
 #include <windows.h>
 
-namespace uxtheme
+namespace UxTheme
 {
 
 class CRenderObj;
@@ -108,4 +108,4 @@ private:
     DIBINFO MultiDibs[7];
 };
 
-} // namespace uxtheme
+} // namespace UxTheme

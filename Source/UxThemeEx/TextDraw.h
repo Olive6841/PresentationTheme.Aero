@@ -5,7 +5,7 @@
 #include <vssym32.h>
 #include <windows.h>
 
-namespace uxtheme
+namespace UxTheme
 {
 
 class CRenderObj;
@@ -46,4 +46,4 @@ public:
     int _iSourceStateId;
 };
 
-} // namespace uxtheme
+} // namespace UxTheme

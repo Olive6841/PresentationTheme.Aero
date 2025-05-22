@@ -3,7 +3,7 @@
 #include "UxThemeHelpers.h"
 #include <wincodec.h>
 
-namespace uxtheme
+namespace UxTheme
 {
 
 class CThemePNGDecoder
@@ -28,4 +28,4 @@ private:
     IWICBitmapDecoderInfo* _pBitmapDecoderInfo = nullptr;
 };
 
-} // namespace uxtheme
+} // namespace UxTheme

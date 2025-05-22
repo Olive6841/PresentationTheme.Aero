@@ -1,7 +1,7 @@
 #include "ThemeMemStream.h"
 #include "Utils.h"
 
-namespace uxtheme
+namespace UxTheme
 {
     CThemeMemStream::CThemeMemStream(size_t cbInitialSize, int)
         : m_fRead(FALSE)
@@ -233,4 +233,4 @@ namespace uxtheme
         size.QuadPart = cbSize;
         return SetSize(size);
     }
-} // namespace uxtheme
+} // namespace UxTheme

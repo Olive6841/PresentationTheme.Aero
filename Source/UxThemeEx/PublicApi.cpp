@@ -15,9 +15,9 @@
 #include <CommonControls.h>
 #include <strsafe.h>
 
-using namespace uxtheme;
+using namespace UxTheme;
 
-namespace uxtheme
+namespace UxTheme
 {
 
 struct PropertyFieldTable
@@ -462,7 +462,7 @@ void CThemeApiHelper::CloseHandle()
         _renderList->CloseThemeHandle(_iRenderSlotNum);
 }
 
-} // namespace uxtheme
+} // namespace UxTheme
 
 struct LOADTHEMEFORTESTPARAMS
 {

@@ -17,7 +17,7 @@
 #include <strsafe.h>
 #include <vssym32.h>
 
-namespace uxtheme
+namespace UxTheme
 {
     struct VISUALSTYLELOAD
     {
@@ -1350,4 +1350,4 @@ namespace uxtheme
         EndEntry(u);
         return hr;
     }
-} // namespace uxtheme
+} // namespace UxTheme

@@ -5,7 +5,7 @@
 #include <utility>
 #include <windows.h>
 
-namespace uxtheme
+namespace UxTheme
 {
 
 class SymbolContext
@@ -50,4 +50,4 @@ private:
     bool initialized = false;
 };
 
-} // namespace uxtheme
+} // namespace UxTheme

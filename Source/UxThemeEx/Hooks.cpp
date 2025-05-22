@@ -210,7 +210,7 @@ struct CThemeMenuBar : CThemeMenu
     }
 };
 
-using namespace uxtheme;
+using namespace UxTheme;
 
 static std::unordered_map<HTHEME, HTHEME> g_ThemeHandleMap;
 

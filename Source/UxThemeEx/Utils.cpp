@@ -10,7 +10,7 @@
 #include <tlhelp32.h>
 #include <windows.h>
 
-namespace uxtheme
+namespace UxTheme
 {
     static HANDLE s_hHeapToUse;
 
@@ -533,4 +533,4 @@ namespace uxtheme
         version.Revision = (verInfo->dwFileVersionLS >> 0) & 0xFFFFu;
         return S_OK;
     }
-} // namespace uxtheme
+} // namespace UxTheme

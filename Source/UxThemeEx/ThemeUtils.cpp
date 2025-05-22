@@ -1,7 +1,7 @@
 #include "ThemeUtils.h"
 #include <intsafe.h>
 
-namespace uxtheme
+namespace UxTheme
 {
 
 HRESULT BitmapPixels::OpenBitmap(HDC hdc, HBITMAP bitmap, bool fForceRGB32,
@@ -81,4 +81,4 @@ void BitmapPixels::CloseBitmap(HDC hdc, HBITMAP hBitmap)
     _hdrBitmap = nullptr;
 }
 
-} // namespace uxtheme
+} // namespace UxTheme

@@ -2,7 +2,7 @@
 #include "Primitives.h"
 #include <windows.h>
 
-namespace uxtheme
+namespace UxTheme
 {
 
 class CUxThemeFile
@@ -70,4 +70,4 @@ private:
     int _cbNonSharableData = 0;
 };
 
-} // namespace uxtheme
+} // namespace UxTheme

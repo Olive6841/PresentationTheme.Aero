@@ -7,7 +7,7 @@
 #include <strsafe.h>
 #include <winternl.h>
 
-namespace uxtheme
+namespace UxTheme
 {
 
 CUxThemeFile::CUxThemeFile()
@@ -167,4 +167,4 @@ HRESULT CUxThemeFile::GetGlobalTheme(HANDLE* phSharableSection,
     return S_OK;
 }
 
-} // namespace uxtheme
+} // namespace UxTheme

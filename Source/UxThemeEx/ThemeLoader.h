@@ -5,7 +5,7 @@
 #include <vector>
 #include <windows.h>
 
-namespace uxtheme
+namespace UxTheme
 {
     class CRenderObj;
 
@@ -108,4 +108,4 @@ namespace uxtheme
         std::vector<int> _rgBaseClassIds;       // CThemeArray
         std::vector<LOGFONTW> _fontTable;       // CThemeArray
     };
-} // namespace uxtheme
+} // namespace UxTheme

@@ -13,7 +13,7 @@ NTSYSAPI NTSTATUS NTAPI NtOpenSection(_Out_ PHANDLE SectionHandle,
                                       _In_ ACCESS_MASK DesiredAccess,
                                       _In_ POBJECT_ATTRIBUTES ObjectAttributes);
 
-namespace uxtheme
+namespace UxTheme
 {
 
 Section::Section(DWORD desiredSectionAccess, DWORD desiredViewAccess)
@@ -94,4 +94,4 @@ HRESULT RootSection::GetRootSectionData(ROOTSECTION** ppRootSection)
     return S_OK;
 }
 
-} // namespace uxtheme
+} // namespace UxTheme

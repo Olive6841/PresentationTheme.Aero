@@ -1,7 +1,7 @@
 #pragma once
 #include <windows.h>
 
-namespace uxtheme
+namespace UxTheme
 {
 
 enum PLATEAU_INDEX
@@ -93,4 +93,4 @@ inline bool IsScreenDC(HDC hdc)
     return false;
 }
 
-} // namespace uxtheme
+} // namespace UxTheme

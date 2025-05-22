@@ -3,7 +3,7 @@
 #include "RenderObj.h"
 #include <algorithm>
 
-namespace uxtheme
+namespace UxTheme
 {
 
 bool CBorderFill::KeyProperty(int iPropId)
@@ -268,4 +268,4 @@ HRESULT CBorderFill::HitTestBackground(CRenderObj* pRender, int iStateId, DWORD 
     return S_OK;
 }
 
-} // namespace uxtheme
+} // namespace UxTheme
