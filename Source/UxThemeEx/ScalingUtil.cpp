@@ -5,39 +5,63 @@
 
 namespace uxtheme
 {
+    void ScaleLongValues(long scale, long* numbers, int count)
+    {
+        for (long i = 0; i < count; ++i)
+            numbers[i] *= scale;
+    }
 
-int ScaleThemeSize(HDC hdc, _In_ CRenderObj const* pRender, int iValue)
-{
-    int dpi;
-    if (!hdc || (pRender->IsStronglyAssociatedDpi() && IsScreenDC(hdc)))
-        dpi = pRender->GetAssociatedDpi();
-    else
-        dpi = GetDeviceCaps(hdc, LOGPIXELSX);
+    int ScaleThemeSize(HDC hdc, CRenderObj const* pRender, int iValue)
+    {
+        int iAssociatedDpi;
+        if (hdc)
+        {
+            if (pRender->IsStronglyAssociatedDpi() && (UINT)IsScreenDC(hdc))
+                iAssociatedDpi = pRender->GetAssociatedDpi();
+            else
+                iAssociatedDpi = GetDeviceCaps(hdc, LOGPIXELSX);
+        }
+        else
+        {
+            iAssociatedDpi = pRender->GetAssociatedDpi();
+        }
+        return MulDiv(iValue, iAssociatedDpi, 96);
+    }
 
-    return MulDiv(iValue, dpi, 96);
-}
+    void ScaleThemeFont(HDC hdc, CRenderObj const* pRender, LOGFONTW* plf)
+    {
+        if (plf->lfHeight < 0)
+        {
+            int iAssociatedDpi;
+            if (hdc)
+            {
+                if (pRender->IsStronglyAssociatedDpi() && (UINT)IsScreenDC(hdc))
+                    iAssociatedDpi = pRender->GetAssociatedDpi();
+                else
+                    iAssociatedDpi = GetDeviceCaps(hdc, LOGPIXELSX);
+            }
+            else
+            {
+                iAssociatedDpi = pRender->GetAssociatedDpi();
+            }
+            plf->lfHeight = MulDiv(plf->lfHeight, iAssociatedDpi, 96);
+        }
+    }
 
-void ScaleThemeFont(HDC hdc, _In_ CRenderObj const* pRender, _In_ LOGFONTW* plf)
-{
-    if (plf->lfHeight < 0)
-        plf->lfHeight = ScaleThemeSize(hdc, pRender, plf->lfHeight);
-}
+    void ScaleFontForScreenDpi(LOGFONTW* plf)
+    {
+        if (plf->lfHeight < 0)
+            plf->lfHeight = MulDiv(plf->lfHeight, GetScreenDpi(), 96);
+    }
 
-void ScaleFontForScreenDpi(_In_ LOGFONTW* plf)
-{
-    if (plf->lfHeight < 0)
-        plf->lfHeight = MulDiv(plf->lfHeight, GetScreenDpi(), 96);
-}
-
-void ScaleMargins(MARGINS* margins, unsigned targetDpi)
-{
-    if (!margins)
-        return;
-
-    margins->cxLeftWidth = MulDiv(margins->cxLeftWidth, targetDpi, 96);
-    margins->cxRightWidth = MulDiv(margins->cxRightWidth, targetDpi, 96);
-    margins->cyTopHeight = MulDiv(margins->cyTopHeight, targetDpi, 96);
-    margins->cyBottomHeight = MulDiv(margins->cyBottomHeight, targetDpi, 96);
-}
-
+    void ScaleMargins(MARGINS* pMargins, UINT targetDpi)
+    {
+        if (pMargins)
+        {
+            pMargins->cxLeftWidth = MulDiv(pMargins->cxLeftWidth, targetDpi, 96);
+            pMargins->cxRightWidth = MulDiv(pMargins->cxRightWidth, targetDpi, 96);
+            pMargins->cyTopHeight = MulDiv(pMargins->cyTopHeight, targetDpi, 96);
+            pMargins->cyBottomHeight = MulDiv(pMargins->cyBottomHeight, targetDpi, 96);
+        }
+    }
 } // namespace uxtheme

@@ -176,6 +176,7 @@
     <ClCompile Include="RenderObj.cpp" />
     <ClCompile Include="ScalingUtil.cpp" />
     <ClCompile Include="Sections.cpp" />
+    <ClCompile Include="SetHook.cpp" />
     <ClCompile Include="SymbolContext.cpp" />
     <ClCompile Include="TextDraw.cpp" />
     <ClCompile Include="ThemeLoader.cpp" />
@@ -209,6 +210,7 @@
     <ClInclude Include="RenderObj.h" />
     <ClInclude Include="ScalingUtil.h" />
     <ClInclude Include="Sections.h" />
+    <ClInclude Include="SetHook.h" />
     <ClInclude Include="SymbolContext.h" />
     <ClInclude Include="TextDraw.h" />
     <ClInclude Include="ThemeLoader.h" />
