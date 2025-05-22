@@ -298,41 +298,41 @@ namespace UxTheme
         return wMiss;
     }
 
-    WORD HitTest9Grid(RECT const* prc, MARGINS const* margins, POINT const& pt,
+    WORD HitTest9Grid(RECT const* prc, MARGINS const& margins, POINT const& pt,
                       bool fCheckLeftMarginZero)
     {
-        if (!fCheckLeftMarginZero || margins->cxLeftWidth != 0 ||
-            margins->cxRightWidth == 0)
+        if (!fCheckLeftMarginZero || margins.cxLeftWidth != 0 ||
+            margins.cxRightWidth == 0)
         {
-            if (HTLEFT == _HitTestRectLeft(prc, margins->cxLeftWidth, 0, pt, HTCLIENT))
+            if (HTLEFT == _HitTestRectLeft(prc, margins.cxLeftWidth, 0, pt, HTCLIENT))
             {
-                if (HTTOP == _HitTestRectTop(prc, 0, margins->cyTopHeight, pt, HTCLIENT))
+                if (HTTOP == _HitTestRectTop(prc, 0, margins.cyTopHeight, pt, HTCLIENT))
                     return HTTOPLEFT;
                 if (HTBOTTOM ==
-                    _HitTestRectBottom(prc, 0, margins->cyBottomHeight, pt, HTCLIENT))
+                    _HitTestRectBottom(prc, 0, margins.cyBottomHeight, pt, HTCLIENT))
                     return HTBOTTOMLEFT;
                 return HTLEFT;
             }
         }
 
-        if (HTRIGHT == _HitTestRectRight(prc, margins->cxRightWidth, 0, pt, HTCLIENT))
+        if (HTRIGHT == _HitTestRectRight(prc, margins.cxRightWidth, 0, pt, HTCLIENT))
         {
-            if (HTTOP == _HitTestRectTop(prc, 0, margins->cyTopHeight, pt, HTCLIENT))
+            if (HTTOP == _HitTestRectTop(prc, 0, margins.cyTopHeight, pt, HTCLIENT))
                 return HTTOPRIGHT;
-            if (HTBOTTOM == _HitTestRectBottom(prc, 0, margins->cyBottomHeight, pt, HTCLIENT))
+            if (HTBOTTOM == _HitTestRectBottom(prc, 0, margins.cyBottomHeight, pt, HTCLIENT))
                 return HTBOTTOMRIGHT;
             return HTRIGHT;
         }
 
-        if (HTTOP == _HitTestRectTop(prc, 0, margins->cyTopHeight, pt, HTCLIENT))
+        if (HTTOP == _HitTestRectTop(prc, 0, margins.cyTopHeight, pt, HTCLIENT))
             return HTTOP;
-        if (HTBOTTOM == _HitTestRectBottom(prc, 0, margins->cyBottomHeight, pt, HTCLIENT))
+        if (HTBOTTOM == _HitTestRectBottom(prc, 0, margins.cyBottomHeight, pt, HTCLIENT))
             return HTBOTTOM;
 
         return HTCLIENT;
     }
 
-    WORD HitTestRect(DWORD dwHTFlags, RECT const* prc, MARGINS const* margins,
+    WORD HitTestRect(DWORD dwHTFlags, RECT const* prc, MARGINS const& margins,
                      POINT const& pt)
     {
         if (!PtInRect(prc, pt))

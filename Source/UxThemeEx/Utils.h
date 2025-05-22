@@ -404,7 +404,7 @@ inline HRESULT GetLastErrorAsHResult()
     } while (false)
 
 #define TRACE_HR(hr)                                                                     \
-    (true ? ::uxtheme::TraceHResult((hr), __FILE__, __LINE__, __FUNCTION__) : (hr))
+    (true ? ::UxTheme::TraceHResult((hr), __FILE__, __LINE__, __FUNCTION__) : (hr))
 
 long TraceHResult(long hresult, char const* file = nullptr, int lineNumber = 0,
                   char const* function = nullptr);
