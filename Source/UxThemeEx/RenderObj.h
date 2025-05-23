@@ -71,83 +71,82 @@ private:
     LOGFONTW _lfDisplayFont;
 };
 
-class alignas(8) CRenderObj
+class CRenderObj
 {
 public:
-    CRenderObj(CUxThemeFile* pThemeFile, int iCacheSlot, int iThemeOffset,
-               int iClassNameOffset, int64_t iUniqueId, bool fEnableCache, int iTargetDpi,
-               bool fIsStronglyAssociatedDpi, unsigned dwOtdFlags);
-    ~CRenderObj();
-
-    HBITMAP BitmapIndexToHandle(int index) const
-    {
-        return _phBitmapsArray[index].hBitmap;
-    }
-
-    void SetBitmapHandle(int iBitmapIndex, HBITMAP hbmp)
-    {
-        _phBitmapsArray[iBitmapIndex].hBitmap = hbmp;
-    }
-
     static HRESULT Create(CUxThemeFile* pThemeFile, int iCacheSlot, int iThemeOffset,
                           int iAppNameOffset, int iClassNameOffset, int64_t iUniqueId,
                           bool fEnableCache, CDrawBase* pBaseObj, CTextDraw* pTextObj,
                           int iTargetDpi, bool fIsStronglyAssociatedDpi,
                           unsigned dwOtdFlags, CRenderObj** ppObj);
-
-    void GetEffectiveDpi(HDC hdc, int* px, int* py) const;
-    TMBITMAPHEADER* GetBitmapHeader(int iDibOffset) const;
+    ~CRenderObj();
+    CRenderObj(CUxThemeFile* pThemeFile, int iCacheSlot, int iThemeOffset,
+               int iClassNameOffset, int64_t iUniqueId, bool fEnableCache, int iTargetDpi,
+               bool fIsStronglyAssociatedDpi, unsigned dwOtdFlags);
+    
     bool GetFontTableIndex(int iPartId, int iStateId, int iPropId,
                            unsigned short* pFontIndex) const;
-    CRenderCache* GetCacheObject();
-
-    HRESULT GetCachedDisplayFontHandle(HDC hdc, LOGFONTW const& lf, HFONT* phFont);
+    HRESULT ExternalGetColor(int iPartId, int iStateId, int iPropId, COLORREF* pColor) const;
+    HRESULT ExternalGetMetric(HDC hdc, int iPartId, int iStateId, int iPropId,
+                              int* piVal) const;
+    HRESULT ExternalGetString(int iPartId, int iStateId, int iPropId, wchar_t* pszBuff,
+                              unsigned cchBuff) const;
+    HRESULT ExternalGetBool(int iPartId, int iStateId, int iPropId, int* pfVal) const;
+    HRESULT ExternalGetInt(int iPartId, int iStateId, int iPropId, int* piVal) const;
+    HRESULT ExternalGetEnumValue(int iPartId, int iStateId, int iPropId,
+                                 int* piVal) const;
+    HRESULT ExternalGetPosition(int iPartId, int iStateId, int iPropId,
+                                POINT* pPoint) const;
+    HRESULT ExternalGetFont(HDC hdc, int iPartId, int iStateId, int iPropId,
+                            bool fWantHdcScaling, LOGFONTW* pFont) const;
+    HRESULT ExternalGetMargins(HDC hdc, int iPartId, int iStateId, int iPropId,
+                               RECT const* formal, MARGINS* pMargins) const;
+    HRESULT ExternalGetIntList(int iPartId, int iStateId, int iPropId,
+                               INTLIST* pIntList) const;
+    HRESULT ExternalGetRect(int iPartId, int iStateId, int iPropId, RECT* pRect) const;
+    // HRESULT ExternalGetFilename(int, int, int, wchar_t*, unsigned long);
+    HRESULT GetPropertyOrigin(int iPartId, int iStateId, int iTarget,
+                              PROPERTYORIGIN* pOrigin) const;
+    HRESULT ExternalGetStream(int iPartId, int iStateId, int iPropId, void** ppvStream,
+                              DWORD* pcbStream, HINSTANCE hInst) const;
+    // ENTRYHDR* GetEntry(int, int, int);
+    BOOL IsPartDefined(int iPartId, int iStateId) const;
+    HRESULT ExternalGetBitmap(HDC hdc, int iDibOffset, unsigned dwFlags,
+                              HBITMAP* phBitmap) const;
+    HRESULT GetTransitionDuration(int iPartId, int iStateIdFrom, int iStateIdTo,
+                                  int iPropId, DWORD* pdwDuration) const;
+    HRESULT GetAnimationProperty(int iPartId, int iStateId,
+                                 AnimationProperty const** ppAnimationProperty) const;
+    HRESULT GetAnimationTransform(int iPartId, int iStateId, DWORD dwIndex,
+                                  TA_TRANSFORM const** ppAnimationTransform) const;
+    HRESULT GetTimingFunction(int iTimingFunctionId,
+                              TA_TIMINGFUNCTION const** ppTimingFunc) const;
     HRESULT GetScaledFontHandle(HDC hdc, unsigned short FontIndex, HFONT* phFont);
+    HRESULT GetCachedDisplayFontHandle(HDC hdc, LOGFONTW const& lf, HFONT* phFont);
+    void ReturnBitmap(HBITMAP hbmp) { DeleteObject(hbmp); }
 
     void ReturnFontHandle(HFONT hFont)
     {
         if (hFont && !_fCacheEnabled)
             DeleteObject(hFont);
     }
-
-    void ReturnBitmap(HBITMAP hbmp) { DeleteObject(hbmp); }
-
+    int GetAssociatedDpi() const { return _iAssociatedDpi; }
+    bool IsStronglyAssociatedDpi() const { return _fIsStronglyAssociatedDpi; }
+    void GetEffectiveDpi(HDC hdc, int* px, int* py) const;
+    bool IsReady() const;
     int GetValueIndex(int iPartId, int iStateId, int iTarget) const;
-    bool IsPartDefined(int iPartId, int iStateId) const;
-    HRESULT GetPropertyOrigin(int iPartId, int iStateId, int iTarget,
-                              PROPERTYORIGIN* pOrigin) const;
+    ENTRYHDR* GetEntryHeader(int index) const
+    {
+        return reinterpret_cast<ENTRYHDR*>(_pbSharableData + index - sizeof(ENTRYHDR));
+    }
+
+    HRESULT PrepareRegionDataForScaling(RGNDATA* pRgnData, RECT const* prcImage,
+                                        MARGINS* pMargins);
+    TMBITMAPHEADER* GetBitmapHeader(int iDibOffset) const;
+    HBITMAP BitmapIndexToHandle(int index) const { return _phBitmapsArray[index].hBitmap; }
+    void SetBitmapHandle(int iBitmapIndex, HBITMAP hbmp) { _phBitmapsArray[iBitmapIndex].hBitmap = hbmp; }
     BYTE const* GetLastValidThemeByte() const;
-
-    HRESULT ExternalGetBitmap(HDC hdc, int iDibOffset, unsigned dwFlags,
-                              HBITMAP* phBitmap) const;
-    HRESULT ExternalGetBool(int iPartId, int iStateId, int iPropId, int* pfVal) const;
-    HRESULT ExternalGetEnumValue(int iPartId, int iStateId, int iPropId,
-                                 int* piVal) const;
-    HRESULT ExternalGetFont(HDC hdc, int iPartId, int iStateId, int iPropId,
-                            bool fWantHdcScaling, LOGFONTW* pFont) const;
-    HRESULT ExternalGetInt(int iPartId, int iStateId, int iPropId, int* piVal) const;
-    HRESULT ExternalGetIntList(int iPartId, int iStateId, int iPropId,
-                               INTLIST* pIntList) const;
-    HRESULT ExternalGetMargins(HDC hdc, int iPartId, int iStateId, int iPropId,
-                               RECT const* formal, MARGINS* pMargins) const;
-    HRESULT ExternalGetMetric(HDC hdc, int iPartId, int iStateId, int iPropId,
-                              int* piVal) const;
-    HRESULT GetAnimationProperty(int iPartId, int iStateId,
-                                 AnimationProperty const** ppAnimationProperty) const;
-    HRESULT GetAnimationTransform(int iPartId, int iStateId, DWORD dwIndex,
-                                  TA_TRANSFORM const** ppAnimationTransform) const;
-    HRESULT GetTransitionDuration(int iPartId, int iStateIdFrom, int iStateIdTo,
-                                  int iPropId, DWORD* pdwDuration) const;
-    HRESULT GetTimingFunction(int iTimingFunctionId,
-                              TA_TIMINGFUNCTION const** ppTimingFunc) const;
-    HRESULT ExternalGetPosition(int iPartId, int iStateId, int iPropId,
-                                POINT* pPoint) const;
-    HRESULT ExternalGetRect(int iPartId, int iStateId, int iPropId, RECT* pRect) const;
-    HRESULT ExternalGetStream(int iPartId, int iStateId, int iPropId, void** ppvStream,
-                              DWORD* pcbStream, HINSTANCE hInst) const;
-    HRESULT ExternalGetString(int iPartId, int iStateId, int iPropId, wchar_t* pszBuff,
-                              unsigned cchBuff) const;
-
+    CRenderCache* GetCacheObject();
     HRESULT ExpandPartObjectCache(int cParts);
 
     template<typename T>
@@ -164,11 +163,6 @@ public:
 
     template<typename T>
     HRESULT GetPartObject(int iPartId, int iStateId, T** ppvObj);
-    HRESULT PrepareRegionDataForScaling(RGNDATA* pRgnData, RECT const* prcImage,
-                                        MARGINS* pMargins);
-
-    int GetAssociatedDpi() const { return _iAssociatedDpi; }
-    bool IsStronglyAssociatedDpi() const { return _fIsStronglyAssociatedDpi; }
 
     int GetThemeOffset() const
     {
@@ -182,20 +176,13 @@ public:
         return &_ptm->lfFonts[index];
     }
 
-    bool IsReady() const;
-
-    ENTRYHDR* GetEntryHeader(int index) const
-    {
-        return reinterpret_cast<ENTRYHDR*>(_pbSharableData + index - sizeof(ENTRYHDR));
-    }
-
 private:
     bool _IsDWMAtlas() const;
 
 public:
     CUxThemeFile* _pThemeFile;
     int _iCacheSlot;
-    int64_t _iUniqueId;
+    LONGLONG _iUniqueId; /* __int64 */
     BYTE* _pbSharableData;
     BYTE* _pbSectionData;
     BYTE* _pbNonSharableData;
@@ -204,15 +191,18 @@ public:
     bool _fCloseThemeFile;
     bool _fPartCacheInitialized;
     THEMEMETRICS* _ptm;
-    wchar_t const* _pszClassName;
-    std::vector<std::unique_ptr<CStateIdObjectCache>> _pParts;
-    unsigned _dwOtdFlags;
+    LPCWSTR _pszClassName;
+    std::vector<std::unique_ptr<CStateIdObjectCache>> _pParts; // CThemeArray
+    DWORD _dwOtdFlags;
 
 private:
     std::unique_ptr<CImageDecoder> _pPngDecoder;
     std::unique_ptr<CImageEncoder> _pPngEncoder;
     std::unique_ptr<CRenderCache> _pCacheObj;
     std::mutex _lock;
+    //DiagnosticAnimationXML* _pDiagnosticXML;
+    bool _fDiagnosticModeEnabled; // @Note: Used for DiagnosticAnimationXML debugging stuff
+    //bool _HasDiagnosticAnimationXMLChanged(bool);
     int _iAssociatedDpi;
     bool _fIsStronglyAssociatedDpi;
 };

@@ -51,72 +51,68 @@ BOOL CTextDraw::KeyProperty(int iPropId)
 
 HRESULT CTextDraw::PackProperties(CRenderObj* pRender, int iPartId, int iStateId)
 {
-    static_assert(std::is_trivially_copyable_v<CTextDraw>);
     memset(this, 0, sizeof(CTextDraw));
 
     _iSourcePartId = iPartId;
     _iSourceStateId = iStateId;
 
-    if (pRender->ExternalGetInt(iPartId, iStateId, TMT_TEXTCOLOR, (int*)&_crText) < 0)
+    // Color
+    if (FAILED(pRender->ExternalGetColor(iPartId, iStateId, TMT_TEXTCOLOR, &_crText)))
         _crText = 0;
 
-    if (pRender->ExternalGetPosition(iPartId, iStateId, TMT_TEXTSHADOWOFFSET,
-                                     &_ptShadowOffset) >= 0) {
-        if (pRender->ExternalGetInt(iPartId, iStateId, TMT_TEXTSHADOWCOLOR,
-                                    (int*)&_crShadow) < 0)
+    // Shadow properties
+    if (SUCCEEDED(pRender->ExternalGetPosition(iPartId, iStateId, TMT_TEXTSHADOWOFFSET, &_ptShadowOffset)))
+    {
+        if (FAILED(pRender->ExternalGetColor(iPartId, iStateId, TMT_TEXTSHADOWCOLOR, &_crShadow)))
             _crShadow = 0;
-        if (pRender->ExternalGetEnumValue(iPartId, iStateId, TMT_TEXTSHADOWTYPE,
-                                          (int*)&_eShadowType) < 0)
+        if (FAILED(pRender->ExternalGetEnumValue(iPartId, iStateId, TMT_TEXTSHADOWTYPE, (int*)&_eShadowType)))
             _eShadowType = TST_NONE;
     }
 
-    if (pRender->ExternalGetInt(iPartId, iStateId, TMT_TEXTBORDERSIZE, &_iBorderSize) < 0)
+    // Border properties
+    if (FAILED(pRender->ExternalGetInt(iPartId, iStateId, TMT_TEXTBORDERSIZE, &_iBorderSize)))
+    {
         _iBorderSize = 0;
-    else {
-        if (pRender->ExternalGetInt(iPartId, iStateId, TMT_TEXTBORDERCOLOR,
-                                    (int*)&_crBorder) < 0)
+    }
+    else
+    {
+        if (FAILED(pRender->ExternalGetColor(iPartId, iStateId, TMT_TEXTBORDERCOLOR, &_crBorder)))
             _crBorder = 0;
-        if (pRender->ExternalGetBool(iPartId, iStateId, TMT_TEXTAPPLYOVERLAY,
-                                     &_fApplyOverlay) < 0)
-            _fApplyOverlay = 0;
+        if (FAILED(pRender->ExternalGetBool(iPartId, iStateId, TMT_TEXTAPPLYOVERLAY, &_fApplyOverlay)))
+            _fApplyOverlay = FALSE;
     }
 
-    if (pRender->ExternalGetInt(iPartId, iStateId, TMT_TEXTGLOWSIZE, &_iGlowSize) < 0)
+    // Glow properties
+    if (FAILED(pRender->ExternalGetInt(iPartId, iStateId, TMT_TEXTGLOWSIZE, &_iGlowSize)))
         _iGlowSize = 0;
-    if (pRender->ExternalGetInt(iPartId, iStateId, TMT_GLOWINTENSITY, &_iGlowIntensity) <
-        0)
+    if (FAILED(pRender->ExternalGetInt(iPartId, iStateId, TMT_GLOWINTENSITY, &_iGlowIntensity)))
         _iGlowIntensity = 0;
-    if (pRender->ExternalGetInt(iPartId, iStateId, TMT_GLOWCOLOR, (int*)&_crGlow) < 0)
+    if (FAILED(pRender->ExternalGetColor(iPartId, iStateId, TMT_GLOWCOLOR, &_crGlow)))
         _crGlow = 0xFFFFFF;
 
+    // Font properties
     pRender->GetFontTableIndex(iPartId, iStateId, TMT_FONT, &_iFontIndex);
-    if (pRender->ExternalGetBool(iPartId, iStateId, TMT_TEXTITALIC, &_fItalicFont) < 0)
-        _fItalicFont = 0;
+    if (FAILED(pRender->ExternalGetBool(iPartId, iStateId, TMT_TEXTITALIC, &_fItalicFont)))
+        _fItalicFont = FALSE;
 
-    if (pRender->ExternalGetInt(iPartId, iStateId, TMT_EDGELIGHTCOLOR,
-                                (int*)&_crEdgeLight) < 0)
+    // Edge color properties
+    if (FAILED(pRender->ExternalGetColor(iPartId, iStateId, TMT_EDGELIGHTCOLOR, &_crEdgeLight)))
         _crEdgeLight = 0xC0C0C0;
-    if (pRender->ExternalGetInt(iPartId, iStateId, TMT_EDGEHIGHLIGHTCOLOR,
-                                (int*)&_crEdgeHighlight) < 0)
+    if (FAILED(pRender->ExternalGetColor(iPartId, iStateId, TMT_EDGEHIGHLIGHTCOLOR, &_crEdgeHighlight)))
         _crEdgeHighlight = 0xFFFFFF;
-    if (pRender->ExternalGetInt(iPartId, iStateId, TMT_EDGESHADOWCOLOR,
-                                (int*)&_crEdgeShadow) < 0)
+    if (FAILED(pRender->ExternalGetColor(iPartId, iStateId, TMT_EDGESHADOWCOLOR, &_crEdgeShadow)))
         _crEdgeShadow = 0x808080;
-    if (pRender->ExternalGetInt(iPartId, iStateId, TMT_EDGEDKSHADOWCOLOR,
-                                (int*)&_crEdgeDkShadow) < 0)
+    if (FAILED(pRender->ExternalGetColor(iPartId, iStateId, TMT_EDGEDKSHADOWCOLOR, &_crEdgeDkShadow)))
         _crEdgeDkShadow = 0;
-    if (pRender->ExternalGetInt(iPartId, iStateId, TMT_EDGEFILLCOLOR,
-                                (int*)&_crEdgeFill) < 0)
+    if (FAILED(pRender->ExternalGetColor(iPartId, iStateId, TMT_EDGEFILLCOLOR, &_crEdgeFill)))
         _crEdgeFill = _crEdgeLight;
-    if (pRender->ExternalGetBool(iPartId, iStateId, TMT_COMPOSITED, &_fComposited) < 0)
-        _fComposited = 0;
 
-    if (!_fComposited) {
-        int textGlow;
-        if (pRender->ExternalGetBool(iPartId, iStateId, TMT_TEXTGLOW, &textGlow) < 0 ||
-            !textGlow)
-            _iGlowSize = 0;
-    }
+    // Composition related properties
+    if (FAILED(pRender->ExternalGetBool(iPartId, iStateId, TMT_COMPOSITED, &_fComposited)))
+        _fComposited = FALSE;
+    BOOL fGlow;
+    if (!_fComposited && (FAILED(pRender->ExternalGetBool(iPartId, iStateId, TMT_TEXTGLOW, &fGlow)) || !fGlow))
+        _iGlowSize = 0;
 
     return S_OK;
 }

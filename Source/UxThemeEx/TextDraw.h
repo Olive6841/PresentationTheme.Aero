@@ -13,16 +13,17 @@ class CRenderObj;
 class CTextDraw
 {
 public:
-    static BOOL KeyProperty(int iPropId);
     HRESULT PackProperties(CRenderObj* pRender, int iPartId, int iStateId);
+    static BOOL KeyProperty(int iPropId);
+    HRESULT DrawTextW(HTHEMEFILE hThemeFile, CRenderObj* pRender, HDC hdc, int iPartId,
+                      int iStateId, wchar_t const* pszText, unsigned dwCharCount,
+                      unsigned dwTextFlags, RECT* pRect, DTTOPTS const* pOptions);
+    // HRESULT DrawEdge(class CRenderObj * ,struct HDC__ * ,int ,int ,struct tagRECT * ,unsigned int ,unsigned int ,struct tagRECT * );
     HRESULT GetTextExtent(CRenderObj* pRender, HDC hdc, int iPartId, int iStateId,
                           wchar_t const* _pszText, int iCharCount, unsigned dwTextFlags,
                           RECT const* pBoundingRect, RECT* pExtentRect);
     HRESULT GetTextMetricsW(CRenderObj* pRender, HDC hdc, int iPartId, int iStateId,
                             TEXTMETRICW* ptm);
-    HRESULT DrawTextW(HTHEMEFILE hThemeFile, CRenderObj* pRender, HDC hdc, int iPartId,
-                      int iStateId, wchar_t const* pszText, unsigned dwCharCount,
-                      unsigned dwTextFlags, RECT* pRect, DTTOPTS const* pOptions);
 
     BOOL _fComposited;
     COLORREF _crText;

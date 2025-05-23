@@ -551,6 +551,18 @@ BYTE const* CRenderObj::GetLastValidThemeByte() const
     return _pbSharableData + themeHdr->dwTotalLength - 1 - 8;
 }
 
+HRESULT CRenderObj::ExternalGetColor(int iPartId, int iStateId, int iPropId, COLORREF* pColor) const
+{
+    if (!pColor)
+        return E_POINTER;
+
+    int ValueIndex = GetValueIndex(iPartId, iStateId, iPropId);
+    if (ValueIndex < 0)
+        return 0x80070490;
+    *pColor = *(COLORREF*)&_pbSharableData[ValueIndex];
+    return S_OK;
+}
+
 HRESULT CRenderObj::GetPropertyOrigin(int iPartId, int iStateId, int iTarget,
                                       PROPERTYORIGIN* pOrigin) const
 {
@@ -684,13 +696,13 @@ int CRenderObj::GetValueIndex(int iPartId, int iStateId, int iTarget) const
     return -1;
 }
 
-bool CRenderObj::IsPartDefined(int iPartId, int iStateId) const
+BOOL CRenderObj::IsPartDefined(int iPartId, int iStateId) const
 {
     PROPERTYORIGIN origin;
     HRESULT hr = GetPropertyOrigin(iPartId, iStateId, -1, &origin);
     SetLastError(hr);
-    if (hr < 0)
-        return false;
+    if (FAILED(hr))
+        return FALSE;
 
     if (iStateId)
         return origin == PO_STATE;
